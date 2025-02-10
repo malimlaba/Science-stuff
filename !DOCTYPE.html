@@ -10,6 +10,8 @@
             text-align: center;
             background-color: #ffccdf;
             padding: 50px;
+            position: relative;
+            overflow: hidden;
         }
         h1 {
             color: #ff4081;
@@ -33,6 +35,15 @@
             background-color: #ff3d3d;
             color: white;
             position: absolute;
+            transition: transform 0.2s ease-out;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            #no {
+                position: relative;
+                display: inline-block;
+            }
         }
     </style>
 </head>
@@ -42,25 +53,19 @@
     
     <div class="button-container">
         <button id="yes" onclick="alert('Yay! 🥰 Best decision ever!')">Yes</button>
-        <button id="no" onmouseover="moveButton()">No</button>
+        <button id="no" onmouseover="moveButton()" onclick="moveButton()">No</button>
     </div>
 
     <script>
         function moveButton() {
             var noButton = document.getElementById("no");
-            var x = Math.random() * (window.innerWidth - 100);
-            var y = Math.random() * (window.innerHeight - 50);
-            noButton.style.left = x + "px";
-            noButton.style.top = y + "px";
+            var maxX = window.innerWidth - noButton.offsetWidth - 20;
+            var maxY = window.innerHeight - noButton.offsetHeight - 20;
+            var x = Math.random() * maxX;
+            var y = Math.random() * maxY;
+            noButton.style.transform = `translate(${x}px, ${y}px)`;
         }
     </script>
-
-@media (max-width: 600px) {
-    #no {
-        position: relative; /* Prevents the button from getting lost on small screens */
-    }
-}
-
 
 </body>
 </html>
